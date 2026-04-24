@@ -3,20 +3,24 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Intervention extends Model
 {
-    protected $table = 'interventions';
-    protected $primaryKey = 'code_interv';
-    public $incrementing = true;
-    protected $keyType = 'int';
-    public $timestamps = true;
+    use HasFactory;
+
+    protected $table      = 'intervention';
+    protected $primaryKey = 'code_int';
+    public $incrementing  = true;
+    protected $keyType    = 'int';
+    public $timestamps    = true;
 
     protected $fillable = [
-        'code_interv',
-        'date_interv',
-        'description_interv',
-        'code_user',
+        'date_int',
+        'note_int',
+        'commentaire_int',
+        'code_user_client',
+        'code_user_techn',
         'code_comp',
     ];
 
@@ -27,7 +31,7 @@ class Intervention extends Model
 
     public function technicien()
     {
-        return $this->belongsTo(Utilisateur::class, 'code_user_tech', 'code_user');
+        return $this->belongsTo(Utilisateur::class, 'code_user_techn', 'code_user');
     }
 
     public function competence()
